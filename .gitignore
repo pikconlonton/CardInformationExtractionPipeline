@@ -1,0 +1,13 @@
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+.env
+test/inference_model/
+*.jpg
+*.png
+*.pdf
+*.ttf
+*otf
