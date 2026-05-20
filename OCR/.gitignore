@@ -5,10 +5,14 @@ __pycache__/
 *$py.class
 .ipynb_checkpoints/
 .env
-test/inference_model/*
+test/inference_model/
+test/new_inference_model/
+test/inference_model_old/
+dataset_combined/
+dataset/
 *.jpg
 *.png
 *.pdf
 *.ttf
 *otf
-dataset/
+*.zip

@@ -11,7 +11,7 @@ Generates synthetic text images with:
   - Optional train/val/test split
 
 Usage:
-    python generate_dataset.py --num-samples 10000 --output-dir dataset
+    python genData\generate_italic_dataset.py --num-samples 10000 --output-dir dataset
 """
 
 import os
@@ -528,16 +528,16 @@ def main():
 
     # ── Directories ──────────────────────────────────────────
     output_dir = Path(args.output_dir)
-    fonts_dir = Path(r"C:\OCR\genData\fonts")
+    fonts_dir = Path(r"C:\OCR\OCR\genData\fonts")
     images_dir = output_dir / "images"
     images_dir.mkdir(parents=True, exist_ok=True)
 
     # ── Fonts ────────────────────────────────────────────────
-    print("\n── Loading fonts ──────────────────────────────────────────────")
+    print("\n-- Loading fonts ----------------------------------------------")
     fonts = load_fonts(fonts_dir)
 
     # ── Generation ───────────────────────────────────────────
-    print(f"\n── Generating {args.num_samples:,} samples ────────────────────────────────")
+    print(f"\n-- Generating {args.num_samples:,} samples --------------------------------")
 
     char_counts: dict = defaultdict(int)
     all_labels: list  = []              # list of (rel_path, text)
@@ -566,19 +566,19 @@ def main():
         "test":  all_labels[n_train + n_val :],
     }
 
-    print("\n── Writing label files ─────────────────────────────────────────")
+    print("\n-- Writing label files -----------------------------------------")
     for split_name, data in splits.items():
         out_file = output_dir / f"{split_name}.txt"
         with open(out_file, "w", encoding="utf-8") as f:
             for path, text in data:
                 f.write(f"{path}\t{text}\n")
-        print(f"  {split_name:5s}: {len(data):6,} samples  →  {out_file}")
+        print(f"  {split_name:5s}: {len(data):6,} samples  ->  {out_file}")
 
     # ── Charset file ─────────────────────────────────────────
     charset_file = output_dir / "charset.txt"
     with open(charset_file, "w", encoding="utf-8") as f:
         f.write(CHARSET)
-    print(f"\n  Charset ({CHARSET_SIZE} chars)  →  {charset_file}")
+    print(f"\n  Charset ({CHARSET_SIZE} chars)  ->  {charset_file}")
 
     # ── Statistics ───────────────────────────────────────────
     counts_sorted = dict(sorted(char_counts.items(), key=lambda kv: kv[1]))
@@ -606,7 +606,7 @@ def main():
         json.dump(stats, f, ensure_ascii=False, indent=2)
 
     # ── Summary ──────────────────────────────────────────────
-    print("\n══ Summary ═══════════════════════════════════════════════════════")
+    print("\n== Summary =======================================================")
     print(f"  Total samples  : {n:,}")
     print(f"  Total tokens   : {total_tokens:,}")
     print(f"  Unique chars   : {len(char_counts)}/{CHARSET_SIZE}")
@@ -616,7 +616,7 @@ def main():
     print(f"  Image height   : {args.img_height}px")
     print(f"  Output dir     : {output_dir.resolve()}")
     print(f"  Stats file     : {stats_file}")
-    print("\n✔  Dataset generation complete!\n")
+    print("\n[*] Dataset generation complete!\n")
 
 
 if __name__ == "__main__":

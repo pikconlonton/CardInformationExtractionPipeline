@@ -30,7 +30,7 @@ def parse_full_log(file_path):
     return pd.DataFrame(data)
 
 # Đọc file train.txt
-df = parse_full_log(r'C:\OCR\src_train\train.txt')
+df = parse_full_log(r'C:\OCR\OCR\src_train\train2.txt')
 
 # Tạo khung hình 4 biểu đồ
 fig, axes = plt.subplots(2, 2, figsize=(16, 10))
@@ -52,7 +52,7 @@ axes[0, 1].grid(True, alpha=0.3)
 
 # 3. Learning Rate Schedule
 axes[1, 0].plot(df['step'], df['lr'], label='Learning Rate', color='purple')
-axes[1, 0].set_title('Chiến lược giảm Learning Rate')
+axes[1, 0].set_title('Learning Rate')
 axes[1, 0].legend()
 axes[1, 0].grid(True, alpha=0.3)
 
